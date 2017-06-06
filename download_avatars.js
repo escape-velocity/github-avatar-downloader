@@ -18,7 +18,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   };
   console.log(options);
   request(options, function(err, response, body){
-    if (err || (response && response.statusCode != 200)) {
+    if (err || (response && response.statusCode !== 200)) {
       console.log('error:', err);
       console.log('response status code:', response.statusCode);
       console.log('response:', response.body.message);
