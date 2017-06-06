@@ -18,7 +18,10 @@ function getRepoContributors(repoOwner, repoName, cb) {
   };
   console.log(options);
   request(options, function(err, response, body){
-    if (err) {
+    if (err || (response && response.statusCode != 200)) {
+      console.log('error:', err);
+      console.log('response status code:', response.statusCode);
+      console.log('response:', response.body.message);
       throw err;
     } else {
       cb(err, body);
@@ -36,8 +39,8 @@ getRepoContributors(repoOwner, repoName, function(err, body) {
   for (var i = 0; i < parsedResults.length; i++) {
     downloadImageByURL(parsedResults[i]["avatar_url"], `avatars/${i}.jpg`);
   }
-  // console.log("Errors:", err);
-  // console.log("Result:", parsedResults);
+  // console.log("Errors:", err
+    // console.log("Result:", parsedResults);
   // console.log(parsedResults);
 });
 
